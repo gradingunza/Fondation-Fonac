@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FONAC - Tableau de bord Administrateur</title>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #10b981;
+            --orange: #f97316;
+            --blue: #3b82f6;
+            --red: #ef4444;
+            --text-light: #e2e8f0;
+            --text-gray: #94a3b8;
+            --bg-dark: #0f172a;
+            --bg-card: rgba(30, 41, 59, 0.8);
+            --bg-sidebar: rgba(15, 23, 42, 0.95);
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Instrument Sans', sans-serif; 
+            background: var(--bg-dark); 
+            color: var(--text-light); 
+            line-height: 1.6; 
+            display: flex;
+            min-height: 100vh;
+        }
+        a { text-decoration: none; }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: var(--bg-sidebar);
+            border-right: 1px solid var(--border-color);
+            padding: 1.5rem 0;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            z-index: 40;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo { 
+            display: flex; 
+            align-items: center; 
+            gap: 0.75rem; 
+            padding: 0 1.5rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 1.5rem;
+        }
+        .logo img { 
+            height: 50px; 
+            width: 50px; 
+            border-radius: 50%; 
+            border: 2px solid rgba(249,115,22,0.5); 
+            transition: transform 0.3s; 
+        }
+        .logo img:hover { transform: scale(1.05); }
+        .logo-text h1 { font-size: 1.2rem; font-weight: 700; color: white; }
+        .logo-text p { font-size: 0.8rem; color: var(--blue); }
+        
+        .admin-info {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0 1.5rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 1.5rem;
+        }
+        .admin-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--orange), var(--blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        .admin-details h3 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+        .admin-details p {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+        }
+        
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 0 1rem;
+        }
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: var(--text-light);
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            background: rgba(30, 41, 59, 0.6);
+            color: var(--orange);
+        }
+        .nav-links a i {
+            width: 20px;
+            text-align: center;
+        }
+        
+        .logout-btn {
+            margin-top: auto;
+            margin-bottom: 1rem;
+            padding: 0 1rem;
+        }
+        .logout-btn a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: var(--red);
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+        }
+        .logout-btn a:hover {
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 2rem;
+            transition: margin-left 0.3s ease;
+        }
+        
+        .header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .header-bar h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--orange);
+        }
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        .stat-card i {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .stat-card .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        .stat-card .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+        .messages-section {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid var(--border-color);
+        }
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .section-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .filters {
+            display: flex;
+            gap: 1rem;
+        }
+        .filter-btn {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--orange);
+            color: white;
+        }
+        
+        .messages-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .message-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .message-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        .message-card.unread {
+            border-left: 4px solid var(--orange);
+        }
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        .message-sender {
+            font-weight: 600;
+            color: var(--orange);
+        }
+        .message-date {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+        }
+        .message-content {
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        .message-actions {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: flex-end;
+        }
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-delete {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--red);
+        }
+        .btn-delete:hover {
+            background: var(--red);
+            color: white;
+        }
+        .btn-mark {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--blue);
+        }
+        .btn-mark:hover {
+            background: var(--blue);
+            color: white;
+        }
+        .btn-reply {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--primary);
+        }
+        .btn-reply:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-gray);
+        }
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        /* Mobile Menu Toggle */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .mobile-toggle {
+                display: block;
+            }
+            .stats-cards {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 1rem;
+            }
+            .header-bar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            .filters {
+                flex-wrap: wrap;
+            }
+            .stats-cards {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .stats-cards {
+                grid-template-columns: 1fr;
+            }
+            .message-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sidebar Navigation -->
+<div class="sidebar" id="sidebar">
+    <div class="logo">
+        <img src="images/fonac.png" alt="FONAC Logo">
+        <div class="logo-text">
+            <h1>FONAC</h1>
+            <p>ADMINISTRATION</p>
+        </div>
+    </div>
+    
+    <div class="admin-info">
+        <div class="admin-avatar">A</div>
+        <div class="admin-details">
+            <h3>Admin FONAC</h3>
+            <p>Administrateur</p>
+        </div>
+    </div>
+    
+    <div class="nav-links">
+        <a href="#" class="active"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a>
+        <a href="#"><i class="fas fa-envelope"></i> Messages</a>
+        <a href="#"><i class="fas fa-users"></i> Utilisateurs</a>
+        <a href="#"><i class="fas fa-chart-bar"></i> Statistiques</a>
+        <a href="#"><i class="fas fa-cog"></i> Paramètres</a>
+    </div>
+    
+    <div class="logout-btn">
+        <a href="#"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+    <div class="header-bar">
+        <div>
+            <button class="mobile-toggle" id="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <h1>Tableau de bord administrateur</h1>
+        </div>
+        <div class="filters">
+            <button class="filter-btn active">Tous</button>
+            <button class="filter-btn">Non lus</button>
+            <button class="filter-btn">Aujourd'hui</button>
+        </div>
+    </div>
+    
+    <div class="stats-cards">
+        <div class="stat-card">
+            <i class="fas fa-envelope" style="color: #3b82f6;"></i>
+            <div class="stat-value">42</div>
+            <div class="stat-label">Messages reçus</div>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-eye-slash" style="color: #f97316;"></i>
+            <div class="stat-value">12</div>
+            <div class="stat-label">Non lus</div>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-reply" style="color: #10b981;"></i>
+            <div class="stat-value">24</div>
+            <div class="stat-label">Répondu</div>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-trash" style="color: #ef4444;"></i>
+            <div class="stat-value">6</div>
+            <div class="stat-label">Supprimés</div>
+        </div>
+    </div>
+    
+    <div class="messages-section">
+        <div class="section-header">
+            <h2>Messages récents</h2>
+            <div class="filters">
+                <button class="filter-btn active">Tous</button>
+                <button class="filter-btn">Non lus</button>
+                <button class="filter-btn">Importants</button>
+            </div>
+        </div>
+        
+        <div class="messages-list">
+            @if(messages && messages.length === 0)
+                <div class="empty-state">
+                    <i class="fas fa-inbox"></i>
+                    <h3>Aucun message pour le moment</h3>
+                    <p>Les nouveaux messages apparaîtront ici.</p>
+                </div>
+            @else
+                @each(message in messages)
+                    <div class="message-card @if(!message.read)unread@endif">
+                        <div class="message-header">
+                            <div>
+                                <div class="message-sender">{{ message.name }}</div>
+                                <div class="message-email">{{ message.email }}</div>
+                            </div>
+                            <div class="message-date">{{ message.createdAt.toFormat('dd/MM/yyyy HH:mm') }}</div>
+                        </div>
+                        <div class="message-content">
+                            {{ message.message }}
+                        </div>
+                        
+                    </div>
+                @endeach
+            @endif
+        </div>
+    </div>
+</div>
+
+<script>
+    // Mobile menu toggle
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const sidebar = document.getElementById('sidebar');
+    
+    mobileToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+    });
+    
+    // Filter buttons
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        });
+    });
+    
+    // Message actions
+    const messageCards = document.querySelectorAll('.message-card');
+    messageCards.forEach(card => {
+        const markBtn = card.querySelector('.btn-mark');
+        if (markBtn) {
+            markBtn.addEventListener('click', () => {
+                card.classList.toggle('unread');
+                const icon = markBtn.querySelector('i');
+                const text = markBtn.querySelector('span') || markBtn;
+                
+                if (card.classList.contains('unread')) {
+                    icon.className = 'fas fa-envelope';
+                    text.textContent = 'Marquer lu';
+                } else {
+                    icon.className = 'fas fa-envelope-open';
+                    text.textContent = 'Marquer non lu';
+                }
+            });
+        }
+        
+        const deleteBtn = card.querySelector('.btn-delete');
+        if (deleteBtn) {
+            deleteBtn.addEventListener('click', () => {
+                if (confirm('Êtes-vous sûr de vouloir supprimer ce message ?')) {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateX(-100px)';
+                    setTimeout(() => {
+                        card.remove();
+                    }, 300);
+                }
+            });
+        }
+    });
+</script>
+
+</body>
+</html>
