@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FONAC - ENSEMBLE MAINS DANS LA MAIN</title>
+    <meta name="description" content="FONAC - Fondation d'utilité publique pour la professionnalisation des conducteurs de deux-roues. Sécurité, formation et digitalisation.">
+
+    <link rel="preconnect" href="https://fonts.bunny.net" />
+    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
+
+    <style>
+        /* Styles précédents inchangés */
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --secondary: #1e293b;
+            --accent: #f59e0b;
+            --orange: #f97316;
+            --blue: #3b82f6;
+            --text-light: #e2e8f0;
+            --text-gray: #94a3b8;
+            --bg-dark: #0f172a;
+            --bg-card: rgba(30, 41, 59, 0.6);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: "Instrument Sans", sans-serif;
+            background-color: var(--bg-dark);
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .nav-link {
+            color: white;
+            font-weight: 500;
+            transition: color 0.2s ease;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: #f97316;
+        }
+        
+        .nav-underline {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, var(--orange) 0%, var(--blue) 100%);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover .nav-underline {
+            width: 100%;
+        }
+        
+        .mobile-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #e2e8f0;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease;
+            font-weight: 500;
+        }
+        
+        .mobile-nav-link:hover {
+            color: #f97316;
+            background-color: rgba(30, 41, 59, 0.5);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, var(--orange) 0%, var(--blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .bg-gradient-primary {
+            background: linear-gradient(135deg, var(--orange) 0%, var(--blue) 100%);
+        }
+        
+        .section-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+            border-radius: 16px;
+        }
+        
+        .section-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(249, 115, 22, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.7) 100%);
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/hero-bg.jpg') center/cover no-repeat;
+            z-index: -1;
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn-primary {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--orange) 0%, var(--blue) 100%);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+        
+        .btn-secondary {
+            display: inline-block;
+            background: transparent;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            border: 2px solid var(--orange);
+            transition: all 0.3s ease;
+            margin-left: 1rem;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(249, 115, 22, 0.1);
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem; /* Réduit de 3rem à 2rem */
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--orange) 0%, var(--blue) 100%);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+        
+        .feature-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 2rem;
+            height: 100%;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(249, 115, 22, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            background: rgba(249, 115, 22, 0.1);
+            font-size: 1.8rem;
+        }
+        
+        .stats-section {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+            padding: 2rem 0; /* Réduit de 3rem à 2rem */
+            border-radius: 16px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        
+        .stat-number {
+            font-size: clamp(2.5rem, 5vw, 3rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--orange) 0%, var(--blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* DISPOSITION DES IMAGES */
+        .image-gallery-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            height: 100%;
+        }
+        
+        .main-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            aspect-ratio: 16/9;
+        }
+        
+        .secondary-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .secondary-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            aspect-ratio: 4/3;
+        }
+        
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .main-image:hover img,
+        .secondary-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 1.5rem;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .main-image:hover .image-overlay,
+        .secondary-image:hover .image-overlay {
+            transform: translateY(0);
+        }
+        
+        .footer {
+            background: #1e293b;
+            padding: 2rem 0 1rem; /* Réduit de 3rem à 2rem */
+            border-top: 1px solid #334155;
+        }
+        
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 1.5rem; /* Réduit de 2rem à 1.5rem */
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #334155;
+            padding-top: 1rem; /* Réduit de 1.5rem à 1rem */
+            text-align: center;
+            color: var(--text-gray);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+        
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+        
+        /* Couleurs des titres */
+        .title-orange {
+            color: var(--orange);
+        }
+        
+        .title-blue {
+            color: var(--blue);
+        }
+        
+        /* NOUVEAUX STYLES POUR LA SECTION FAMILLE */
+        .family-section {
+            padding: 3rem 0; /* Espacement réduit */
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
+        }
+        
+        .family-title {
+            font-size: clamp(1.8rem, 4vw, 2.2rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--orange);
+        }
+        
+        .family-subtitle {
+            text-align: center;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .family-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .family-image {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            transition: all 0.3s ease;
+        }
+        
+        .family-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .family-image:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .family-image:hover img {
+            transform: scale(1.1);
+        }
+        
+        .family-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 1rem;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .family-image:hover .family-overlay {
+            transform: translateY(0);
+        }
+        
+        /* NOUVEAUX STYLES POUR LA SECTION PARTENAIRE */
+        .partners-section {
+            padding: 3rem 0; /* Espacement réduit */
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(249, 115, 22, 0.05) 100%);
+        }
+        
+        .partner-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 2rem; /* Réduit de 2.5rem à 2rem */
+            text-align: center;
+            transition: all 0.3s ease;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .partner-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(249, 115, 22, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .partner-logo {
+            width: 200px;
+            height: 100px;
+            object-fit: contain;
+            margin: 0 auto 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .partner-card:hover .partner-logo {
+            transform: scale(1.05);
+        }
+        
+        .partner-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--orange);
+        }
+        
+        .partner-description {
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .partner-benefits {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .benefit-tag {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--blue);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        /* RESPONSIVE DESIGN AMÉLIORÉ */
+        
+        /* Mobile First */
+        .container {
+            width: 100%;
+            padding: 0 1rem;
+            margin: 0 auto;
+        }
+        
+        /* Tablette (768px - 1023px) */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .container {
+                max-width: 720px;
+                padding: 0 1.5rem;
+            }
+            
+            .hero-section {
+                min-height: 80vh;
+            }
+            
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .grid-tablet-2 {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .grid-tablet-1 {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .feature-card {
+                padding: 1.5rem;
+            }
+            
+            .stats-section {
+                padding: 1.5rem 0; /* Réduit */
+            }
+            
+            .stat-number {
+                font-size: 2.8rem;
+            }
+            
+            .secondary-images {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .partner-card {
+                padding: 1.5rem; /* Réduit */
+            }
+            
+            .partner-logo {
+                width: 180px;
+                height: 90px;
+            }
+            
+            .family-gallery {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 0.8rem;
+            }
+        }
+        
+        /* Mobile (max 767px) */
+        @media (max-width: 767px) {
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .hero-section {
+                min-height: 70vh;
+                text-align: center;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+                margin-bottom: 1rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .hero-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+            
+            .btn-secondary {
+                margin-left: 0;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 1.5rem; /* Réduit */
+            }
+            
+            .section-title:after {
+                width: 60px;
+                height: 3px;
+            }
+            
+            .grid-mobile-1 {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .feature-card {
+                padding: 1.25rem;
+            }
+            
+            .feature-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+            
+            .stats-section {
+                padding: 1rem 0; /* Réduit */
+            }
+            
+            .stat-item {
+                padding: 1rem;
+            }
+            
+            .stat-number {
+                font-size: 2.2rem;
+            }
+            
+            .secondary-images {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+            
+            .image-gallery-container {
+                gap: 1rem;
+            }
+            
+            .footer-links {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .footer {
+                padding: 1.5rem 0 1rem; /* Réduit */
+            }
+            
+            /* Navigation mobile améliorée */
+            #mobile-menu {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: rgba(15, 23, 42, 0.98);
+                backdrop-filter: blur(10px);
+                z-index: 1000;
+            }
+            
+            .partners-section {
+                padding: 2rem 0; /* Réduit */
+            }
+            
+            .partner-card {
+                padding: 1.25rem; /* Réduit */
+            }
+            
+            .partner-logo {
+                width: 150px;
+                height: 75px;
+            }
+            
+            .partner-title {
+                font-size: 1.3rem;
+            }
+            
+            .benefit-tag {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+            
+            .family-section {
+                padding: 2rem 0; /* Réduit */
+            }
+            
+            .family-gallery {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 0.5rem;
+            }
+            
+            .family-title {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+        }
+        
+        /* Desktop (1024px et plus) */
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 1200px;
+                padding: 0 2rem;
+            }
+            
+            .grid-desktop-2 {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+            
+            .grid-desktop-3 {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2rem;
+            }
+            
+            .partner-card {
+                padding: 2.5rem; /* Légèrement réduit */
+            }
+            
+            .family-gallery {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 1.2rem;
+            }
+        }
+        
+        /* Header avec fond noir */
+        header {
+            background: rgba(15, 23, 42, 0.95) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #334155 !important;
+        }
+        
+        /* RÉDUCTION GÉNÉRALE DES ESPACES ENTRE LES SECTIONS */
+        section {
+            padding: 3rem 0; /* Standard pour toutes les sections */
+        }
+        
+        .hero-section {
+            padding: 0; /* Hero garde son padding spécial */
+        }
+        
+        #services, #rejoindre {
+            padding: 2.5rem 0; /* Légèrement réduit pour ces sections */
+        }
+    </style>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-gray-900/95 backdrop-blur-md border-b border-gray-800">
+        <nav class="container">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="relative group">
+                        <img 
+                            src="images/fonac.png" 
+                            alt="FONAC"
+                            class="h-12 w-12 rounded-full border-2 border-orange-500/50 shadow-lg transition-all duration-300 group-hover:scale-105"
+                        />
+                    </div>
+                    <div class="hidden md:block">
+                        <h1 class="text-lg font-bold text-white">FONAC</h1>
+                        <p class="text-xs text-blue-400">ENSEMBLE MAINS DANS LA MAIN</p>
+                    </div>
+                </div>
+
+                <!-- Navigation Desktop -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#accueil" class="nav-link group relative text-sm">
+                        <span class="flex items-center space-x-2">
+                            <span>🏠</span>
+                            <span>Accueil</span>
+                        </span>
+                        <span class="nav-underline"></span>
+                    </a>
+                    <a href="#services" class="nav-link group relative text-sm">
+                        <span class="flex items-center space-x-2">
+                            <span>⚙️</span>
+                            <span>Services</span>
+                        </span>
+                        <span class="nav-underline"></span>
+                    </a>
+                    <a href="#apropos" class="nav-link group relative text-sm">
+                        <span class="flex items-center space-x-2">
+                            <span>👥</span>
+                            <span>À propos</span>
+                        </span>
+                        <span class="nav-underline"></span>
+                    </a>
+                    <a href="#rejoindre" class="bg-gradient-to-r from-orange-500 to-blue-500 text-white px-4 py-2 rounded-full font-semibold text-sm hover:from-orange-600 hover:to-blue-600 transition-colors">
+                        Nous rejoindre
+                    </a>
+                </div>
+
+                <!-- Menu Mobile -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="p-2 rounded-lg text-gray-200 hover:bg-gray-800 transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Menu Mobile -->
+            <div id="mobile-menu" class="md:hidden hidden py-4 border-t border-gray-800 bg-gray-900/95">
+                <div class="flex flex-col space-y-3">
+                    <a href="#accueil" class="mobile-nav-link text-sm">
+                        <span>🏠</span>
+                        <span>Accueil</span>
+                    </a>
+                    <a href="#services" class="mobile-nav-link text-sm">
+                        <span>⚙️</span>
+                        <span>Services</span>
+                    </a>
+                    <a href="#apropos" class="mobile-nav-link text-sm">
+                        <span>👥</span>
+                        <span>À propos</span>
+                    </a>
+                    <a href="#rejoindre" class="bg-gradient-to-r from-orange-500 to-blue-500 text-white px-4 py-3 rounded-lg font-semibold text-sm mt-2 hover:from-orange-600 hover:to-blue-600 transition-colors text-center">
+                        Nous rejoindre
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Contenu Principal -->
+    <main>
+        <!-- Hero Section -->
+        <section id="accueil" class="hero-section">
+            <div class="hero-bg"></div>
+            <div class="hero-content container">
+                <h1 class="hero-title fade-in-up">
+                    <span class="text-gradient">FONAC</span> - NOUS CONSTRUISONS LA VIE
+                </h1>
+                <p class="hero-subtitle fade-in-up delay-1">
+                    Fondation nationale de formation, d'encadrement des professionels et conducteurs de deux-roues. 
+                    Ensemble, créons un secteur responsable et sécurisé.
+                </p>
+                <div class="hero-buttons fade-in-up delay-2">
+                    <a href="#rejoindre" class="btn-primary">Nous Rejoindre</a>
+                    <a href="#services" class="btn-secondary">Découvrir nos Services</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Mission -->
+        <section id="apropos" class="py-12 md:py-16 container"> <!-- Espacement réduit -->
+            <div class="max-w-7xl mx-auto">
+                <h2 class="section-title fade-in-up">Notre Mission</h2>
+                
+                <div class="grid-desktop-2 gap-6 lg:gap-10 items-center mb-10 lg:mb-14"> <!-- Espacement réduit -->
+                    <!-- Texte Mission -->
+                    <div class="space-y-6 lg:space-y-8">
+                        <div class="section-card p-6 lg:p-8 rounded-xl fade-in-up">
+                            <h3 class="text-xl lg:text-2xl font-bold title-orange mb-4">Notre Identité</h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                FONAC incarne une vision novatrice dans l'écosystème des professionnels de la mobilité sur deux-roues. 
+                                Fondation d'utilité publique, nous structurons, professionnalisons et digitalisons un secteur vital 
+                                pour l'économie et la mobilité urbaine.
+                            </p>
+                        </div>
+
+                        <div class="section-card p-6 lg:p-8 rounded-xl fade-in-up delay-1">
+                            <h3 class="text-lg lg:text-xl font-bold title-blue mb-4 flex items-center">
+                                <span class="feature-icon mr-4">🎯</span>
+                                Notre Mission
+                            </h3>
+                            <p class="text-gray-300 mb-4">
+                                Nous transformons les conducteurs en professionnels responsables maîtrisant :
+                            </p>
+                            <ul class="text-gray-300 space-y-3">
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-orange-500 rounded-full mr-3"></span>
+                                    Le code de la route et la réglementation
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                                    La conduite préventive et sécuritaire
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-orange-500 rounded-full mr-3"></span>
+                                    La mécanique élémentaire et l'entretien
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                                    Les bonnes pratiques professionnelles
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- GALLERIE D'IMAGES -->
+                    <div class="image-gallery-container fade-in-up delay-2">
+                        <div class="main-image">
+                            <img src="images/motard.jpg" alt="Motard professionnel" class="w-[100vw]"/>
+                            <div class="image-overlay">
+                                <h4 class="font-bold text-lg">Expertise & Professionnalisme</h4>
+                                <p class="text-orange-200">Ambassadeurs de la sécurité routière</p>
+                            </div>
+                        </div>
+                        <div class="secondary-images">
+                            <div class="secondary-image">
+                                <img src="images/motoc.jpg" alt="Formation moto" />
+                                <div class="image-overlay">
+                                    <h4 class="font-bold text-lg">Formation Continue</h4>
+                                    <p class="text-blue-200">Excellence et compétence</p>
+                                </div>
+                            </div>
+                            <div class="secondary-image">
+                                <img src="images/motocy.jpg" alt="Communauté FONAC" />
+                                <div class="image-overlay">
+                                    <h4 class="font-bold text-lg">Communauté Engagée</h4>
+                                    <p class="text-orange-200">Solidarité et entraide</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section Chiffres -->
+                <div class="stats-section p-6 lg:p-8 fade-in-up">
+                    <h3 class="text-xl lg:text-2xl font-bold text-center mb-6 lg:mb-8 title-blue">FONAC Objectifs</h3>
+                    <div class="grid-mobile-1 md:grid-tablet-3 lg:grid-desktop-3 gap-6 lg:gap-8">
+                        <div class="stat-item">
+                            <div class="stat-number">+90%</div>
+                            <div class="text-gray-400">Professionnels formés d'ici 2030</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">+98%</div>
+                            <div class="text-gray-400">D'accident du à l'ignorance de code de la route évité</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">+99%</div>
+                            <div class="text-gray-400">Des professionels Moto soient identifiés</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Services -->
+        <section id="services" class="py-12 md:py-16 bg-gray-800/30"> <!-- Espacement réduit -->
+            <div class="container">
+                <h2 class="section-title fade-in-up">Nos Services</h2>
+                
+                <div class="grid-mobile-1 md:grid-tablet-2 lg:grid-desktop-3 gap-6 lg:gap-8">
+                    <div class="feature-card fade-in-up">
+                        <div class="feature-icon bg-gradient-primary text-white">📱</div>
+                        <h3 class="text-lg lg:text-xl font-bold mb-3 title-orange">Plateforme Digitale</h3>
+                        <p class="text-gray-300">
+                            Solution unique d'identification et de gestion des professionnels du deux-roues.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card fade-in-up delay-1">
+                        <div class="feature-icon bg-gradient-primary text-white">🎓</div>
+                        <h3 class="text-lg lg:text-xl font-bold mb-3 title-blue">Formation Certifiante</h3>
+                        <p class="text-gray-300">
+                            Programmes complets pour professionnaliser les conducteurs de deux-roues.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card fade-in-up delay-2">
+                        <div class="feature-icon bg-gradient-primary text-white">🛡️</div>
+                        <h3 class="text-lg lg:text-xl font-bold mb-3 title-orange">Sécurisation</h3>
+                        <p class="text-gray-300">
+                            Outils pour renforcer la sécurité des usagers et lutter contre la criminalité.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card fade-in-up">
+                        <div class="feature-icon bg-gradient-primary text-white">💼</div>
+                        <h3 class="text-lg lg:text-xl font-bold mb-3 title-blue">Accompagnement</h3>
+                        <p class="text-gray-300">
+                            Soutien personnalisé pour l'insertion professionnelle dans le secteur.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card fade-in-up delay-1">
+                        <div class="feature-icon bg-gradient-primary text-white">🤝</div>
+                        <h3 class="text-lg lg:text-xl font-bold mb-3 title-orange">Réseautage</h3>
+                        <p class="text-gray-300">
+                            Mise en relation avec les acteurs clés du secteur des deux-roues.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card fade-in-up delay-2">
+                        <div class="feature-icon bg-gradient-primary text-white">📊</div>
+                        <h3 class="text-lg lg:text-xl font-bold mb-3 title-blue">Analytics</h3>
+                        <p class="text-gray-300">
+                            Données et insights pour optimiser vos activités professionnelles.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Famille FONAC -->
+        <section class="family-section">
+            <div class="container">
+                <h2 class="family-title fade-in-up">Une grande famille</h2>
+                <p class="family-subtitle fade-in-up delay-1">Sous l'égide de la DG Nanga Clémentine visité par le ministre de l'intérieur</p>
+                
+                <div class="family-gallery fade-in-up delay-2">
+                    <div class="family-image">
+                        <img src="images/5.jpg" alt="Membre FONAC" />
+                        <div class="family-overlay">
+                            <p>Membre actif FONAC</p>
+                        </div>
+                    </div>
+                    <div class="family-image">
+                        <img src="images/6.jpg" alt="Membre FONAC" />
+                        <div class="family-overlay">
+                            <p>Membre actif FONAC</p>
+                        </div>
+                    </div>
+                    <div class="family-image">
+                        <img src="images/7.jpg" alt="Membre FONAC" />
+                        <div class="family-overlay">
+                            <p>Membre actif FONAC</p>
+                        </div>
+                    </div>
+                    <div class="family-image">
+                        <img src="images/8.jpg" alt="Membre FONAC" />
+                        <div class="family-overlay">
+                            <p>Membre actif FONAC</p>
+                        </div>
+                    </div>
+                    <div class="family-image">
+                        <img src="images/4.jpg" alt="Membre FONAC" />
+                        <div class="family-overlay">
+                            <p>Membre actif FONAC</p>
+                        </div>
+                    </div>
+                    <div class="family-image">
+                        <img src="images/9.jpg" alt="Membre FONAC" />
+                        <div class="family-overlay">
+                            <p>Membre actif FONAC</p>
+                        </div>
+                    </div>
+                    <div class="family-image">
+                        <img src="images/1.jpg" alt="Membre FONAC" />
+                        <div class="family-overlay">
+                            <p>Membre actif FONAC</p>
+                        </div>
+                    </div>
+                    <div class="family-image">
+                        <img src="images/fonac.png" alt="Membre FONAC" />
+                        <div class="family-overlay">
+                            <p>FONAC Logo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Partenaires -->
+        <section class="partners-section">
+            <div class="container">
+                <h2 class="section-title fade-in-up">Notre Partenaire</h2>
+                
+                <div class="partner-card fade-in-up delay-1">
+                    <div class="partner-logo-container">
+                        <img 
+                            src="images/Airtel.jpg" 
+                            alt="Airtel - Partenaire FONAC"
+                            class="partner-logo"
+                        />
+                    </div>
+                    <h3 class="partner-title">Airtel</h3>
+                    <p class="partner-description">
+                        Partenaire technologique de premier plan, Airtel soutient FONAC dans sa mission 
+                        de digitalisation du secteur des deux-roues. Grâce à leur expertise en connectivité 
+                        et solutions mobiles, nous pouvons offrir des services innovants à nos membres.
+                    </p>
+                    <div class="partner-benefits">
+                        <span class="benefit-tag">Connectivité mobile</span>
+                        <span class="benefit-tag">Solutions digitales</span>
+                        <span class="benefit-tag">Support technologique</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section id="rejoindre" class="py-12 md:py-16 bg-gray-800/30"> <!-- Espacement réduit -->
+            <div class="container">
+                <div class="max-w-5xl mx-auto text-center">
+                    <div class="section-card p-8 lg:p-12 rounded-2xl fade-in-up">
+                        <h2 class="text-2xl lg:text-3xl font-bold text-white mb-4">Rejoignez la Révolution FONAC</h2>
+                        <p class="text-gray-300 mb-6 lg:mb-8 text-base lg:text-lg max-w-2xl mx-auto">
+                            Ensemble, construisons un secteur moto responsable, sécurisé et professionnel. 
+                            Sur ce, apporter votre apport c'est sauver une vie contre les dangers de la mauvaise conduite.
+                        </p>
+                        <div class="flex flex-col sm:flex-row justify-center gap-3 lg:gap-4">
+                            <a href="#contact" class="btn-secondary">Devenir Partenaire ? Cliquez ici</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section Contact -->
+        <section id="contact" class="py-12 md:py-16 container"> <!-- Espacement réduit -->
+            <div class="max-w-7xl mx-auto">
+                <h2 class="section-title fade-in-up">Contactez-nous</h2>
+                
+                <div class="grid-mobile-1 lg:grid-desktop-2 gap-8 lg:gap-12">
+                    <div class="fade-in-up">
+                        <h3 class="text-xl lg:text-2xl font-bold mb-6 title-orange">Informations de contact</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <span class="text-orange-500 mr-3 text-xl">📍</span>
+                                <div>
+                                    <h4 class="font-semibold">Adresse</h4>
+                                    <p class="text-gray-300">123 Avenue de la Mobilité, 75000 Paris</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-blue-500 mr-3 text-xl">📞</span>
+                                <div>
+                                    <h4 class="font-semibold">Téléphone</h4>
+                                    <p class="text-gray-300">+33 1 23 45 67 89</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-orange-500 mr-3 text-xl">✉️</span>
+                                <div>
+                                    <h4 class="font-semibold">Email</h4>
+                                    <p class="text-gray-300">contact@fonac.org</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="fade-in-up delay-1">
+                        <h3 class="text-xl lg:text-2xl font-bold mb-6 title-blue mt-4">Voulez-vous devenir partenaire ? Envoyez-nous un message</h3>
+                        <form class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-gray-300 mb-2">Nom complet</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-orange-500 transition-colors">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-300 mb-2">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500 transition-colors">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-gray-300 mb-2">Message</label>
+                                <textarea id="message" rows="4" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-orange-500 transition-colors"></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary w-full">Envoyer le message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-links">
+                <div>
+                    <h3 class="text-lg font-bold mb-4 text-white">FONAC</h3>
+                    <p class="text-gray-400">
+                        Fondation d'utilité publique pour la professionnalisation des conducteurs de deux-roues.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4 text-white">Liens rapides</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#accueil" class="text-gray-400 hover:text-orange-500 transition-colors">Accueil</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-blue-500 transition-colors">Services</a></li>
+                        <li><a href="#apropos" class="text-gray-400 hover:text-orange-500 transition-colors">À propos</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-blue-500 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4 text-white">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-orange-500 transition-colors">Formation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-blue-500 transition-colors">Plateforme digitale</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-orange-500 transition-colors">Accompagnement</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-blue-500 transition-colors">Réseautage</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-4 text-white">Suivez-nous</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-orange-500 transition-colors">Facebook</a>
+                        <a href="#" class="text-gray-400 hover:text-blue-500 transition-colors">Twitter</a>
+                        <a href="#" class="text-gray-400 hover:text-orange-500 transition-colors">LinkedIn</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 FONAC - Tous droits réservés. ENSEMBLE MAINS DANS LA MAIN</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            mobileMenuButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Fermer le menu en cliquant à l'extérieur
+            document.addEventListener('click', function(e) {
+                if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+            
+            // Animation au scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in-up');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observer les éléments à animer
+            document.querySelectorAll('.fade-in-up').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
