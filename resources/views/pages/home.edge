@@ -8,6 +8,7 @@
 
     <link rel="preconnect" href="https://fonts.bunny.net" />
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,400i,500,500i,600,600i,700,700i" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
     <style>
         /* Styles précédents inchangés */
@@ -22,6 +23,7 @@
             --text-gray: #94a3b8;
             --bg-dark: #0f172a;
             --bg-card: rgba(30, 41, 59, 0.6);
+            --border: #334155;
         }
         
         * {
@@ -189,7 +191,7 @@
             font-size: clamp(2rem, 4vw, 2.5rem);
             font-weight: 700;
             text-align: center;
-            margin-bottom: 2rem; /* Réduit de 3rem à 2rem */
+            margin-bottom: 2rem;
             position: relative;
         }
         
@@ -232,7 +234,7 @@
         
         .stats-section {
             background: linear-gradient(135deg, rgba(249, 115, 22, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
-            padding: 2rem 0; /* Réduit de 3rem à 2rem */
+            padding: 2rem 0;
             border-radius: 16px;
         }
         
@@ -310,7 +312,7 @@
         
         .footer {
             background: #1e293b;
-            padding: 2rem 0 1rem; /* Réduit de 3rem à 2rem */
+            padding: 2rem 0 1rem;
             border-top: 1px solid #334155;
         }
         
@@ -318,12 +320,12 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 2rem;
-            margin-bottom: 1.5rem; /* Réduit de 2rem à 1.5rem */
+            margin-bottom: 1.5rem;
         }
         
         .footer-bottom {
             border-top: 1px solid #334155;
-            padding-top: 1rem; /* Réduit de 1.5rem à 1rem */
+            padding-top: 1rem;
             text-align: center;
             color: var(--text-gray);
         }
@@ -351,6 +353,105 @@
         .delay-2 {
             animation-delay: 0.4s;
         }
+
+        /* =========================== */
+        /* STYLES DU MENU BURGER AMÉLIORÉ (depuis Marketplace) */
+        /* =========================== */
+        
+        /* Bouton menu mobile */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+            transition: all 0.3s ease;
+            z-index: 1002;
+        }
+
+        .mobile-menu-btn:hover {
+            color: var(--orange);
+        }
+
+        /* Menu mobile avec animation */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--bg-dark);
+            z-index: 999;
+            flex-direction: column;
+            padding: 80px 20px 20px 20px;
+            transform: translateX(-100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+        }
+
+        .mobile-menu.active {
+            display: flex;
+            transform: translateX(0);
+        }
+
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 998;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .mobile-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 16px 20px;
+            color: var(--text-light);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            margin-bottom: 5px;
+        }
+
+        .mobile-nav-link:hover {
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateX(5px);
+        }
+
+        .mobile-nav-link:last-child {
+            border-bottom: none;
+        }
+
+        /* Animation spécifique pour le menu mobile */
+        @keyframes slideInFromLeft {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
         
         /* Couleurs des titres */
         .title-orange {
@@ -363,7 +464,7 @@
         
         /* NOUVEAUX STYLES POUR LA SECTION FAMILLE */
         .family-section {
-            padding: 3rem 0; /* Espacement réduit */
+            padding: 3rem 0;
             background: linear-gradient(135deg, rgba(249, 115, 22, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
         }
         
@@ -435,7 +536,7 @@
         
         /* NOUVEAUX STYLES POUR LA SECTION PARTENAIRE */
         .partners-section {
-            padding: 3rem 0; /* Espacement réduit */
+            padding: 3rem 0;
             background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(249, 115, 22, 0.05) 100%);
         }
         
@@ -444,7 +545,7 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
-            padding: 2rem; /* Réduit de 2.5rem à 2rem */
+            padding: 2rem;
             text-align: center;
             transition: all 0.3s ease;
             max-width: 500px;
@@ -499,6 +600,110 @@
             font-weight: 500;
         }
         
+        /* NOUVEAUX STYLES POUR LES MESSAGES FLASH */
+        .flash-messages-container {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            z-index: 1000;
+            max-width: 400px;
+            width: 90%;
+        }
+        
+        .flash-message {
+            position: relative;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid;
+            animation: slideInRight 0.5s ease forwards, fadeOut 0.5s ease 4.5s forwards;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .flash-success {
+            background: rgba(16, 185, 129, 0.15);
+            border-color: rgba(16, 185, 129, 0.3);
+            color: #10b981;
+        }
+        
+        .flash-error {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+        }
+        
+        .flash-icon {
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+        
+        .flash-content {
+            flex: 1;
+        }
+        
+        .flash-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .flash-close {
+            background: none;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+            flex-shrink: 0;
+        }
+        
+        .flash-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: currentColor;
+            opacity: 0.5;
+            width: 100%;
+            transform-origin: left;
+            animation: progressBar 5s linear forwards;
+        }
+        
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+        }
+        
+        @keyframes progressBar {
+            from {
+                transform: scaleX(1);
+            }
+            to {
+                transform: scaleX(0);
+            }
+        }
+        
         /* RESPONSIVE DESIGN AMÉLIORÉ */
         
         /* Mobile First */
@@ -548,7 +753,7 @@
             }
             
             .stats-section {
-                padding: 1.5rem 0; /* Réduit */
+                padding: 1.5rem 0;
             }
             
             .stat-number {
@@ -564,7 +769,7 @@
             }
             
             .partner-card {
-                padding: 1.5rem; /* Réduit */
+                padding: 1.5rem;
             }
             
             .partner-logo {
@@ -575,6 +780,12 @@
             .family-gallery {
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
                 gap: 0.8rem;
+            }
+            
+            .flash-messages-container {
+                top: 80px;
+                right: 15px;
+                max-width: 350px;
             }
         }
         
@@ -612,7 +823,7 @@
             
             .section-title {
                 font-size: 1.8rem;
-                margin-bottom: 1.5rem; /* Réduit */
+                margin-bottom: 1.5rem;
             }
             
             .section-title:after {
@@ -638,7 +849,7 @@
             }
             
             .stats-section {
-                padding: 1rem 0; /* Réduit */
+                padding: 1rem 0;
             }
             
             .stat-item {
@@ -664,26 +875,29 @@
             }
             
             .footer {
-                padding: 1.5rem 0 1rem; /* Réduit */
+                padding: 1.5rem 0 1rem;
             }
             
-            /* Navigation mobile améliorée */
-            #mobile-menu {
-                position: fixed;
-                top: 70px;
-                left: 0;
-                right: 0;
-                background: rgba(15, 23, 42, 0.98);
-                backdrop-filter: blur(10px);
-                z-index: 1000;
+            /* =========================== */
+            /* STYLES AMÉLIORÉS POUR LE MENU MOBILE (depuis Marketplace) */
+            /* =========================== */
+            
+            /* Afficher le bouton menu mobile */
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            /* Masquer la navigation desktop sur mobile */
+            .md\\:flex {
+                display: none !important;
             }
             
             .partners-section {
-                padding: 2rem 0; /* Réduit */
+                padding: 2rem 0;
             }
             
             .partner-card {
-                padding: 1.25rem; /* Réduit */
+                padding: 1.25rem;
             }
             
             .partner-logo {
@@ -701,7 +915,7 @@
             }
             
             .family-section {
-                padding: 2rem 0; /* Réduit */
+                padding: 2rem 0;
             }
             
             .family-gallery {
@@ -712,6 +926,18 @@
             .family-title {
                 font-size: 1.5rem;
                 margin-bottom: 1.5rem;
+            }
+            
+            .flash-messages-container {
+                top: 70px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
+                width: auto;
+            }
+            
+            .flash-message {
+                padding: 1rem;
             }
         }
         
@@ -735,12 +961,19 @@
             }
             
             .partner-card {
-                padding: 2.5rem; /* Légèrement réduit */
+                padding: 2.5rem;
             }
             
             .family-gallery {
                 grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
                 gap: 1.2rem;
+            }
+            
+            /* Masquer les éléments mobiles sur desktop */
+            .mobile-menu-btn,
+            .mobile-menu,
+            .mobile-menu-overlay {
+                display: none !important;
             }
         }
         
@@ -762,6 +995,32 @@
         
         #services, #rejoindre {
             padding: 2.5rem 0; /* Légèrement réduit pour ces sections */
+        }
+        
+        /* Styles pour la section contact simplifiée */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .contact-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .contact-details h4 {
+            margin-bottom: 0.25rem;
+        }
+        
+        .contact-details p {
+            color: var(--text-gray);
         }
     </style>
 
@@ -817,67 +1076,48 @@
 
                 <!-- Menu Mobile -->
                 <div class="md:hidden">
-                    <button id="mobile-menu-button" class="p-2 rounded-lg text-gray-200 hover:bg-gray-800 transition-colors">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                        </svg>
+                    <button id="mobile-menu-toggle" class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
                     </button>
-                </div>
-            </div>
-
-            <!-- Menu Mobile -->
-            <div id="mobile-menu" class="md:hidden hidden py-4 border-t border-gray-800 bg-gray-900/95">
-                <div class="flex flex-col space-y-3">
-                    <a href="#accueil" class="mobile-nav-link text-sm">
-                        <span>🏠</span>
-                        <span>Accueil</span>
-                    </a>
-                    <a href="#services" class="mobile-nav-link text-sm">
-                        <span>⚙️</span>
-                        <span>Services</span>
-                    </a>
-                    <a href="#apropos" class="mobile-nav-link text-sm">
-                        <span>👥</span>
-                        <span>À propos</span>
-                    </a>
-                    <a href="#rejoindre" class="bg-gradient-to-r from-orange-500 to-blue-500 text-white px-4 py-3 rounded-lg font-semibold text-sm mt-2 hover:from-orange-600 hover:to-blue-600 transition-colors text-center">
-                        Nous rejoindre
-                    </a>
                 </div>
             </div>
         </nav>
     </header>
 
+    <!-- Overlay pour le menu mobile -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+
+    <!-- Menu mobile déplié -->
+    <div class="mobile-menu" id="mobile-menu">
+        <a href="#accueil" class="mobile-nav-link">
+            <i class="fas fa-home"></i>
+            <span>Accueil</span>
+        </a>
+        <a href="#services" class="mobile-nav-link">
+            <i class="fas fa-cogs"></i>
+            <span>Services</span>
+        </a>
+        <a href="#apropos" class="mobile-nav-link">
+            <i class="fas fa-users"></i>
+            <span>À propos</span>
+        </a>
+        <a href="#rejoindre" class="mobile-nav-link">
+            <i class="fas fa-handshake"></i>
+            <span>Nous rejoindre</span>
+        </a>
+        <a href="#contact" class="mobile-nav-link">
+            <i class="fas fa-envelope"></i>
+            <span>Contact</span>
+        </a>
+    </div>
+
+    <!-- Container pour les messages flash -->
+    <div class="flash-messages-container" id="flashMessagesContainer">
+        <!-- Les messages flash seront insérés ici dynamiquement -->
+    </div>
+
     <!-- Contenu Principal -->
     <main>
-     <!-- Messages Flash -->
-                            <div class="space-y-4 mb-6">
-                                <!-- Message de succès -->
-                                @if(flashMessages.has('success'))
-                                    <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg">
-                                        {{ flashMessages.get('success') }}
-                                    </div>
-                                @endif
-
-                                <!-- Message d'erreur général -->
-                                @if(flashMessages.has('error'))
-                                    <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
-                                        {{ flashMessages.get('error') }}
-                                    </div>
-                                @endif
-
-                                <!-- Erreurs de validation -->
-                                @if(flashMessages.has('errors'))
-                                    <div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
-                                        <h3 class="font-semibold mb-2">Veuillez corriger les erreurs suivantes :</h3>
-                                        <ul class="list-disc list-inside space-y-1">
-                                            @each(error in flashMessages.get('errors'))
-                                                <li>{{ error.message }}</li>
-                                            @endeach
-                                        </ul>
-                                    </div>
-                                @endif
-                            </div>
         <!-- Hero Section -->
         <section id="accueil" class="hero-section">
             <div class="hero-bg"></div>
@@ -897,11 +1137,11 @@
         </section>
 
         <!-- Section Mission -->
-        <section id="apropos" class="py-12 md:py-16 container"> <!-- Espacement réduit -->
+        <section id="apropos" class="py-12 md:py-16 container">
             <div class="max-w-7xl mx-auto">
                 <h2 class="section-title fade-in-up">Notre Mission</h2>
                 
-                <div class="grid-desktop-2 gap-6 lg:gap-10 items-center mb-10 lg:mb-14"> <!-- Espacement réduit -->
+                <div class="grid-desktop-2 gap-6 lg:gap-10 items-center mb-10 lg:mb-14">
                     <!-- Texte Mission -->
                     <div class="space-y-6 lg:space-y-8">
                         <div class="section-card p-6 lg:p-8 rounded-xl fade-in-up">
@@ -992,7 +1232,7 @@
         </section>
 
         <!-- Section Services -->
-        <section id="services" class="py-12 md:py-16 bg-gray-800/30"> <!-- Espacement réduit -->
+        <section id="services" class="py-12 md:py-16 bg-gray-800/30">
             <div class="container">
                 <h2 class="section-title fade-in-up">Nos Services</h2>
                 
@@ -1136,7 +1376,7 @@
         </section>
 
         <!-- CTA Section -->
-        <section id="rejoindre" class="py-12 md:py-16 bg-gray-800/30"> <!-- Espacement réduit -->
+        <section id="rejoindre" class="py-12 md:py-16 bg-gray-800/30">
             <div class="container">
                 <div class="max-w-5xl mx-auto text-center">
                     <div class="section-card p-8 lg:p-12 rounded-2xl fade-in-up">
@@ -1153,83 +1393,55 @@
             </div>
         </section>
 
-        <!-- Section Contact -->
-        <section id="contact" class="py-12 md:py-16 container"> <!-- Espacement réduit -->
+        <!-- Section Contact simplifiée -->
+        <section id="contact" class="py-12 md:py-16 container">
             <div class="max-w-7xl mx-auto">
                 <h2 class="section-title fade-in-up">Contactez-nous</h2>
                 
                 <div class="grid-mobile-1 lg:grid-desktop-2 gap-8 lg:gap-12">
                     <div class="fade-in-up">
                         <h3 class="text-xl lg:text-2xl font-bold mb-6 title-orange">Informations de contact</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-start">
-                                <span class="text-orange-500 mr-3 text-xl">📍</span>
-                                <div>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <span class="contact-icon text-orange-500">📍</span>
+                                <div class="contact-details">
                                     <h4 class="font-semibold">Adresse</h4>
-                                    <p class="text-gray-300">123 Avenue de la Mobilité, 75000 Paris</p>
+                                    <p>123 Avenue LUKUSA, 78 KINSHASA</p>
                                 </div>
                             </div>
-                            <div class="flex items-start">
-                                <span class="text-blue-500 mr-3 text-xl">📞</span>
-                                <div>
+                            <div class="contact-item">
+                                <span class="contact-icon text-blue-500">📞</span>
+                                <div class="contact-details">
                                     <h4 class="font-semibold">Téléphone</h4>
-                                    <p class="text-gray-300">+33 1 23 45 67 89</p>
+                                    <p>+243 81 36 91 461</p>
                                 </div>
                             </div>
-                            <div class="flex items-start">
-                                <span class="text-orange-500 mr-3 text-xl">✉️</span>
-                                <div>
+                            <div class="contact-item">
+                                <span class="contact-icon text-orange-500">✉️</span>
+                                <div class="contact-details">
                                     <h4 class="font-semibold">Email</h4>
-                                    <p class="text-gray-300">contact@fonac.org</p>
+                                    <p>contact@fonac.org</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
                     <div class="fade-in-up delay-1">
-                        <h3 class="text-xl lg:text-2xl font-bold mb-6 title-blue mt-4">Voulez-vous devenir partenaire ? Envoyez-nous un message</h3>
-                        
-                        <!-- FORMULAIRE DE CONTACT FONCTIONNEL -->
-                        <form id="contactForm" method="POST" action="{{ route('contact.store') }}" class="space-y-4">
-                        {{csrfField()}}
-                            <div>
-                                <label for="name" class="block text-gray-300 mb-2">Nom complet</label>
-                                <input 
-                                    type="text" 
-                                    id="name" 
-                                    name="name"
-                                    class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-orange-500 transition-colors"
-                                >
-                                <div id="name-error" class="text-red-500 text-sm mt-1 hidden"></div>
+                        <h3 class="text-xl lg:text-2xl font-bold mb-6 title-blue text-center">Devenir partenaire</h3>
+                        <div class="section-card p-6 lg:p-8 rounded-xl">
+                            <p class="text-gray-300 mb-6 text-center">
+                                Vous souhaitez devenir partenaire de FONAC et contribuer à la professionnalisation 
+                                du secteur des deux-roues ? Contactez-nous directement via WhatsApp ou email.
+                            </p>
+                            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                                <a href="https://wa.me/243813691461" target="_blank" class="btn-primary text-center">
+                                    💬 WhatsApp
+                                </a>
+                                <a href="mailto:gradingunza@gmail.com" class="btn-secondary text-center">
+                                    ✉️ Envoyer un email
+                                </a>
                             </div>
-                            
-                            <div>
-                                <label for="email" class="block text-gray-300 mb-2">Email</label>
-                                <input 
-                                    type="email" 
-                                    id="email" 
-                                    name="email"
-                                    class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
-                                >
-                                <div id="email-error" class="text-red-500 text-sm mt-1 hidden"></div>
-                            </div>
-                            
-                            <div>
-                                <label for="message" class="block text-gray-300 mb-2">Message</label>
-                                <textarea 
-                                    id="message" 
-                                    name="message"
-                                    rows="4" 
-                                    class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-orange-500 transition-colors"
-                                ></textarea>
-                                <div id="message-error" class="text-red-500 text-sm mt-1 hidden"></div>
-                            </div>
-                
-                            
-                            <button type="submit" class="btn-primary w-full" id="submitBtn">
-                                Envoyer le message
-                            </button>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1240,67 +1452,98 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-links">
-                <div>
-                    <h3 class="text-lg font-bold mb-4 text-white">FONAC</h3>
-                    <p class="text-gray-400">
+                <div class="text-center md:text-left">
+                    <h3 class="text-lg font-bold mb-3 text-white">FONAC</h3>
+                    <p class="text-gray-400 text-xs md:text-sm leading-relaxed">
                         Fondation d'utilité publique pour la professionnalisation des conducteurs de deux-roues.
                     </p>
                 </div>
                 
-                <div>
-                    <h3 class="text-lg font-bold mb-4 text-white">Liens rapides</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#accueil" class="text-gray-400 hover:text-orange-500 transition-colors">Accueil</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-blue-500 transition-colors">Services</a></li>
-                        <li><a href="#apropos" class="text-gray-400 hover:text-orange-500 transition-colors">À propos</a></li>
-                        <li><a href="#contact" class="text-gray-400 hover:text-blue-500 transition-colors">Contact</a></li>
+                <div class="text-center md:text-left">
+                    <h3 class="text-lg font-bold mb-3 text-white">Liens rapides</h3>
+                    <ul class="space-y-1">
+                        <li><a href="#accueil" class="text-gray-400 hover:text-orange-500 transition-colors text-sm">Accueil</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-blue-500 transition-colors text-sm">Services</a></li>
+                        <li><a href="#apropos" class="text-gray-400 hover:text-orange-500 transition-colors text-sm">À propos</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-blue-500 transition-colors text-sm">Contact</a></li>
                     </ul>
                 </div>
                 
-                <div>
-                    <h3 class="text-lg font-bold mb-4 text-white">Services</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-orange-500 transition-colors">Formation</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-blue-500 transition-colors">Plateforme digitale</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-orange-500 transition-colors">Accompagnement</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-blue-500 transition-colors">Réseautage</a></li>
+                <div class="text-center md:text-left">
+                    <h3 class="text-lg font-bold mb-3 text-white">Services</h3>
+                    <ul class="space-y-1">
+                        <li class="text-gray-400 text-sm">Formation</li>
+                        <li class="text-gray-400 text-sm">Plateforme digitale</li>
+                        <li class="text-gray-400 text-sm">Accompagnement</li>
+                        <li class="text-gray-400 text-sm">Réseautage</li>
                     </ul>
                 </div>
                 
-                <div>
-                    <h3 class="text-lg font-bold mb-4 text-white">Suivez-nous</h3>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-orange-500 transition-colors">Facebook</a>
-                        <a href="#" class="text-gray-400 hover:text-blue-500 transition-colors">Twitter</a>
-                        <a href="#" class="text-gray-400 hover:text-orange-500 transition-colors">LinkedIn</a>
+                <div class="text-center md:text-left">
+                    <h3 class="text-lg font-bold mb-3 text-white">Suivez-nous</h3>
+                    <div class="flex justify-center md:justify-start space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-orange-500 transition-colors text-sm">FB</a>
+                        <a href="#" class="text-gray-400 hover:text-blue-500 transition-colors text-sm">TW</a>
+                        <a href="#" class="text-gray-400 hover:text-orange-500 transition-colors text-sm">IN</a>
                     </div>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025 FONAC - Tous droits réservés. ENSEMBLE MAINS DANS LA MAIN</p>
+                <p class="text-xs md:text-sm">&copy; 2025 FONAC - Tous droits réservés. ENSEMBLE MAINS DANS LA MAIN</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Menu mobile
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
+        // Menu mobile amélioré avec le système de Marketplace
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
             const mobileMenu = document.getElementById('mobile-menu');
-            
-            mobileMenuButton.addEventListener('click', function(e) {
-                e.stopPropagation();
-                mobileMenu.classList.toggle('hidden');
-            });
-            
-            // Fermer le menu en cliquant à l'extérieur
-            document.addEventListener('click', function(e) {
-                if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
-                    mobileMenu.classList.add('hidden');
+            const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+            let isMenuOpen = false;
+
+            function toggleMobileMenu() {
+                isMenuOpen = !isMenuOpen;
+                
+                if (isMenuOpen) {
+                    // Ouvrir le menu
+                    mobileMenu.classList.add('active');
+                    mobileMenuOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                    
+                    // Animation des liens
+                    const links = mobileMenu.querySelectorAll('.mobile-nav-link');
+                    links.forEach((link, index) => {
+                        link.style.animation = `slideInFromLeft 0.4s ease ${index * 0.1}s both`;
+                    });
+                } else {
+                    // Fermer le menu
+                    mobileMenu.classList.remove('active');
+                    mobileMenuOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                    
+                    // Réinitialiser les animations
+                    const links = mobileMenu.querySelectorAll('.mobile-nav-link');
+                    links.forEach(link => {
+                        link.style.animation = '';
+                    });
                 }
+            }
+
+            // Événements pour le menu mobile
+            mobileMenuToggle?.addEventListener('click', toggleMobileMenu);
+            mobileMenuOverlay?.addEventListener('click', toggleMobileMenu);
+
+            // Fermer le menu en cliquant sur un lien
+            mobileMenu?.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (isMenuOpen) {
+                        toggleMobileMenu();
+                    }
+                });
             });
-            
+
             // Animation au scroll
             const observerOptions = {
                 threshold: 0.1,
@@ -1319,8 +1562,6 @@
             document.querySelectorAll('.fade-in-up').forEach(el => {
                 observer.observe(el);
             });
-
-            
         });
     </script>
 </body>
