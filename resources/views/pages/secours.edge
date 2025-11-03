@@ -355,7 +355,7 @@
             flex-wrap: wrap;
         }
         
-        /* ===== MISSION SECTION - CORRIGÉE POUR MOBILE ===== */
+        /* ===== MISSION SECTION - AMÉLIORÉE ===== */
         .mission-section {
             background: var(--bg-dark);
         }
@@ -390,8 +390,7 @@
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            height: auto;
-            min-height: auto;
+            height: 100%;
         }
         
         .mission-card::before {
@@ -417,17 +416,14 @@
         
         .mission-features {
             list-style: none;
-            margin-top: 1rem;
         }
         
         .mission-features li {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             margin-bottom: 1rem;
             color: var(--text-light);
             font-size: 1.1rem;
-            line-height: 1.5;
-            padding: 0.5rem 0;
         }
         
         .mission-features li::before {
@@ -436,8 +432,6 @@
             font-weight: bold;
             margin-right: 1rem;
             font-size: 1.2rem;
-            flex-shrink: 0;
-            margin-top: 0.1rem;
         }
         
         .image-gallery {
@@ -723,7 +717,7 @@
             transform: translateY(0);
         }
         
-        /* ===== PARTNERS SECTION - CORRIGÉE ===== */
+        /* ===== PARTNERS SECTION ===== */
         .partners-section {
             background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(249, 115, 22, 0.05) 100%);
         }
@@ -745,15 +739,9 @@
             justify-content: center;
             align-items: center;
             height: 120px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
             padding: 2rem;
-            transition: all 0.3s ease;
-        }
-        
-        .partner-card:hover .partner-logo-container {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-5px);
         }
         
         .partner-logo {
@@ -761,6 +749,7 @@
             max-height: 80px;
             object-fit: contain;
             transition: transform 0.3s ease;
+            filter: brightness(0) invert(1);
         }
         
         .partner-card:hover .partner-logo {
@@ -817,7 +806,7 @@
             margin-top: 2rem;
         }
         
-        /* ===== CONTACT SECTION - CORRIGÉE POUR MOBILE ===== */
+        /* ===== CONTACT SECTION ===== */
         .contact-section {
             background: var(--bg-dark);
         }
@@ -1048,7 +1037,7 @@
             opacity: 1;
         }
         
-        /* ===== RESPONSIVE DESIGN - MODIFICATIONS MOBILE AMÉLIORÉES ===== */
+        /* ===== RESPONSIVE DESIGN ===== */
         @media (max-width: 1024px) {
             .mission-grid,
             .contact-grid {
@@ -1076,97 +1065,12 @@
         }
         
         @media (max-width: 768px) {
-            /* Header mobile - Cacher le texte du logo */
-            .logo-text {
-                display: none;
-            }
-            
             .nav-desktop {
                 display: none;
             }
             
             .mobile-menu-btn {
                 display: block;
-            }
-            
-            /* Ajustements de taille de texte pour mobile */
-            .hero-title {
-                font-size: 2.2rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.1rem;
-                line-height: 1.5;
-            }
-            
-            .section-title {
-                font-size: 1.8rem;
-                margin-bottom: 2rem;
-            }
-            
-            .section-subtitle {
-                font-size: 1rem;
-                margin-bottom: 2rem;
-            }
-            
-            .card p, .mission-card p, .service-card p, .consulting-card p {
-                font-size: 0.9rem;
-                line-height: 1.5;
-            }
-            
-            /* CORRECTIONS SPÉCIFIQUES POUR LA SECTION MISSION */
-            .mission-grid {
-                gap: 2rem;
-            }
-            
-            .mission-card {
-                padding: 1.5rem;
-                height: auto;
-                min-height: auto;
-            }
-            
-            .mission-card h3 {
-                font-size: 1.3rem;
-                margin-bottom: 1rem;
-            }
-            
-            .mission-features {
-                margin-top: 0.5rem;
-            }
-            
-            .mission-features li {
-                font-size: 0.9rem;
-                align-items: flex-start;
-                line-height: 1.4;
-                margin-bottom: 0.8rem;
-                padding: 0.3rem 0;
-            }
-            
-            .mission-features li::before {
-                margin-top: 0.1rem;
-                font-size: 1rem;
-                margin-right: 0.8rem;
-            }
-            
-            .consulting-features li {
-                font-size: 0.9rem;
-            }
-            
-            .project-name {
-                font-size: 1.1rem;
-            }
-            
-            .project-description {
-                font-size: 0.9rem;
-            }
-            
-            .partner-description {
-                font-size: 0.9rem;
-            }
-            
-            .btn {
-                font-size: 0.9rem;
-                padding: 0.8rem 1.5rem;
             }
             
             .hero-buttons,
@@ -1198,78 +1102,11 @@
             }
             
             .card {
-                padding: 1.5rem;
+                padding: 2rem 1.5rem;
             }
             
-            .project-header {
-                padding: 1rem;
-            }
-            
-            .project-header h2 {
-                font-size: 1.3rem;
-            }
-            
-            .project-header h3 {
-                font-size: 1rem;
-            }
-            
-            /* CORRECTIONS POUR LA SECTION CONTACT MOBILE */
-            .contact-grid {
-                gap: 2rem;
-            }
-            
-            .contact-item {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-                gap: 1rem;
-                padding: 1rem;
-            }
-            
-            .contact-icon {
-                width: 50px;
-                height: 50px;
-                font-size: 1.2rem;
-            }
-            
-            .contact-details h4 {
-                font-size: 1rem;
-            }
-            
-            .contact-details p {
-                font-size: 0.9rem;
-            }
-            
-            .contact-form-container .card {
-                padding: 1.5rem;
-            }
-            
-            .contact-form-container h3 {
-                font-size: 1.3rem;
-            }
-            
-            .contact-form-container p {
-                font-size: 0.9rem;
-                margin-bottom: 1.5rem;
-            }
-            
-            /* Footer mobile - Amélioration de l'alignement */
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                text-align: center;
-            }
-            
-            .footer-column {
-                align-items: center;
-            }
-            
-            .social-links {
-                justify-content: center;
-            }
-            
-            .footer-bottom {
-                font-size: 0.9rem;
+            .mission-card {
+                padding: 2rem 1.5rem;
             }
         }
         
@@ -1279,119 +1116,21 @@
             }
             
             .hero-title {
-                font-size: 1.8rem;
+                font-size: 2.5rem;
             }
             
             .section-title {
-                font-size: 1.5rem;
-            }
-            
-            .section-subtitle {
-                font-size: 0.9rem;
+                font-size: 2rem;
             }
             
             .card {
-                padding: 1.2rem;
+                padding: 1.5rem;
             }
             
             .feature-icon {
                 width: 60px;
                 height: 60px;
                 font-size: 1.5rem;
-            }
-            
-            .mission-card {
-                padding: 1.2rem;
-            }
-            
-            .service-card {
-                padding: 1.5rem 1rem;
-            }
-            
-            .consulting-card {
-                padding: 1.5rem 1rem;
-            }
-            
-            .partner-card {
-                padding: 1.5rem 1rem;
-            }
-            
-            .partner-logo-container {
-                height: 100px;
-                padding: 1.5rem;
-            }
-            
-            .partner-logo {
-                max-width: 160px;
-                max-height: 60px;
-            }
-            
-            /* Améliorations supplémentaires pour très petits écrans */
-            .mission-features li {
-                font-size: 0.85rem;
-                line-height: 1.3;
-                margin-bottom: 0.6rem;
-            }
-            
-            .contact-item {
-                gap: 0.8rem;
-                padding: 0.8rem;
-            }
-            
-            .contact-icon {
-                width: 45px;
-                height: 45px;
-                font-size: 1.1rem;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-            
-            .footer-column h3 {
-                font-size: 1.1rem;
-            }
-            
-            .footer-links a {
-                font-size: 0.9rem;
-            }
-            
-            /* Ajustements spécifiques pour les très petits écrans */
-            .mission-grid {
-                gap: 1.5rem;
-            }
-            
-            .mission-cards {
-                gap: 1.5rem;
-            }
-            
-            .image-gallery {
-                gap: 1rem;
-            }
-            
-            .gallery-main,
-            .gallery-item {
-                margin-bottom: 0.5rem;
-            }
-        }
-
-        /* Styles supplémentaires pour améliorer l'affichage mobile */
-        @media (max-width: 768px) {
-            .mission-content,
-            .image-gallery {
-                width: 100%;
-            }
-            
-            .mission-card,
-            .gallery-main,
-            .gallery-item {
-                width: 100%;
-            }
-            
-            .contact-info,
-            .contact-form-container {
-                width: 100%;
             }
         }
     </style>
@@ -1400,10 +1139,13 @@
 </head>
 <body class="bg-gray-900">
     <!-- Header -->
+   
+
+     <!-- Header -->
     <header id="header">
         <div class="container">
             <div class="nav-container">
-                <!-- Logo - Seulement l'image en mobile -->
+                <!-- Logo -->
                 <a href="#accueil" class="logo">
                     <img src="images/fonac.png" alt="FONAC" class="logo-img">
                     <div class="logo-text">
@@ -1416,6 +1158,7 @@
                 <nav class="nav-desktop">
                     <a href="#accueil" class="nav-link">Accueil</a>
                     <a href="#apropos" class="nav-link">À propos</a>
+                    <a href="#services" class="nav-link">Services</a>
                     <a href="#consulting" class="nav-link">Consulting</a>
                     <a href="#rejoindre" class="nav-cta">Nous rejoindre</a>
                 </nav>
@@ -1441,17 +1184,23 @@
             <i class="fas fa-users"></i>
             <span>À propos</span>
         </a>
+        <a href="#services" class="mobile-nav-link">
+            <i class="fas fa-cogs"></i>
+            <span>Services</span>
+        </a>
         <a href="#consulting" class="mobile-nav-link">
             <i class="fas fa-handshake"></i>
             <span>Consulting</span>
         </a>
-
+        <a href="#rejoindre" class="mobile-nav-link">
+            <i class="fas fa-handshake"></i>
+            <span>Nous rejoindre</span>
+        </a>
         <a href="#contact" class="mobile-nav-link">
             <i class="fas fa-envelope"></i>
             <span>Contact</span>
         </a>
     </div>
-
     <!-- Contenu Principal -->
     <main>
         <!-- Hero Section -->
@@ -1474,7 +1223,7 @@
             </div>
         </section>
 
-        <!-- Section Mission - CORRIGÉE POUR MOBILE -->
+        <!-- Section Mission - AMÉLIORÉE -->
         <section id="apropos" class="mission-section">
             <div class="container">
                 <h2 class="section-title fade-in-up">Notre Vision</h2>
@@ -1496,7 +1245,7 @@
 
                             <div class="mission-card fade-in-up delay-1">
                                 <h3 class="title-blue">Notre Mission</h3>
-                                <p class="text-gray-300 mb-3">
+                                <p class="text-gray-300 mb-4">
                                     Notre engagement se décline en trois axes fondamentaux :
                                 </p>
                                 <ul class="mission-features">
@@ -1517,7 +1266,7 @@
                         
                         <div class="gallery-main">
                             <img src="images/motard.jpg" alt="Motard professionnel">
-                            <div class="image-overlay">
+                            <div class="">
                                 <h4>Expertise & Professionnalisme</h4>
                                 <p>Ambassadeurs de la sécurité routière</p>
                             </div>
@@ -1525,7 +1274,7 @@
                         <div class="gallery-secondary">
                             <div class="gallery-item">
                                 <img src="images/motoc.jpg" alt="Formation moto">
-                                <div class="image-overlay">
+                                <div class="">
                                     <h4>Formation Continue</h4>
                                     <p>Excellence et compétence</p>
                                 </div>
@@ -1540,13 +1289,14 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
 
         <!-- Section Services -->
         <section id="services" class="services-section">
             <div class="container">
-                <h2 class="section-title fade-in-up">Objectif poursuivie dans le projet des Motocycliste</h2>
+                <h2 class="section-title fade-in-up">Objectif poursuivie dans le projet des Motocicyste</h2>
                 <p class="section-subtitle fade-in-up delay-1">
                     Des solutions complètes pour professionnaliser le secteur des deux-roues et au-delà
                 </p>
@@ -1721,7 +1471,7 @@
             </div>
         </section>
 
-        <!-- Section Partenaires - CORRIGÉE ===== -->
+        <!-- Section Partenaires -->
         <section class="partners-section">
             <div class="container">
                 <h2 class="section-title fade-in-up">Nos Partenaires</h2>
@@ -1781,6 +1531,7 @@
             </div>
         </section>
 
+
         <!-- CTA Section -->
         <section id="rejoindre" class="cta-section">
             <div class="container">
@@ -1798,19 +1549,19 @@
             </div>
         </section>
 
-        <!-- Section Contact - CORRIGÉE POUR MOBILE -->
+        <!-- Section Contact -->
         <section id="contact" class="contact-section">
             <div class="container">
                 <h2 class="section-title fade-in-up">Contactez-nous</h2>
                 
                 <div class="contact-grid">
                     <div class="contact-info fade-in-up">
-                        <h3 class="title-orange text-center">Informations de contact</h3>
+                        <h3 class="title-orange">Informations de contact</h3>
                         <div class="contact-item">
                             <div class="contact-icon">📍</div>
                             <div class="contact-details">
                                 <h4>Adresse</h4>
-                                <p>Avenue LUKUSA, 78 KINSHASA</p>
+                                <p>123 Avenue LUKUSA, 78 KINSHASA</p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -1832,7 +1583,7 @@
                     <div class="contact-form-container fade-in-up delay-1">
                         <div class="card">
                             <h3 class="title-blue">Devenir partenaire</h3>
-                            <p class="text-gray-300 mb-4">
+                            <p class="text-gray-300 mb-6">
                                 Vous souhaitez devenir partenaire de FONAC et contribuer à nos missions d'investissement humain, 
                                 d'accompagnement de projets et de consulting ? Contactez-nous directement.
                             </p>
@@ -1874,6 +1625,7 @@
                     <ul class="footer-links">
                         <li><a href="#accueil">Accueil</a></li>
                         <li><a href="#apropos">À propos</a></li>
+                        <li><a href="#services">Services</a></li>
                         <li><a href="#consulting">Consulting</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
