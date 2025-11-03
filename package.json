@@ -14,9 +14,7 @@
   "build": "npm run build:assets && npm run build:html",
   "build:assets": "mkdir -p build/public && cp -r public/* build/public/ || true",
   "build:html": "node scripts/generate-html.js"
-}
-
-,
+},
  
   "imports": {
     "#controllers/*": "./app/controllers/*.js",
