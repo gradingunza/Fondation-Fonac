@@ -1,21 +1,22 @@
 {
-  "name": "winner-tweeter",
+  "name": "fondation-fonac",
   "version": "0.0.0",
   "private": true,
   "type": "module",
   "license": "UNLICENSED",
-  "scripts": {
-    "start": "node bin/server.js",
 
-    "dev": "node ace serve --hmr",
-    "test": "node ace test",
-    "lint": "eslint .",
-    "format": "prettier --write .",
-    "typecheck": "tsc --noEmit",
-    "build": "npm run build:assets && npm run build:html",
+
+  
+    "scripts": {
+    "build": "npm run build:assets",
     "build:assets": "mkdir -p build/public && cp -r public/* build/public/ || true",
-    "build:html": "node scripts/generate-html.js"
+    "dev": "node ace serve --watch"
   },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+
+
  
   "imports": {
     "#controllers/*": "./app/controllers/*.js",
